@@ -20,12 +20,7 @@ public:
     * @param filename name of the file to work with
     */
     ReaderEmulator(char* filename){
-        file = std::make_unique<std::fstream>(
-               std::fstream(filename, std::ios::in  |
-                                      std::ios::out | 
-                                      std::ios::ate | 
-                                      std::ios::binary)
-               );
+        open(filename);
     }
     /**
     *  Empty. Do open(filename) to start working
@@ -35,6 +30,7 @@ public:
     /**
     * Opens the file to work with
     * @param filename name of the file to work with
+    * TODO: check if file ok?
     */
     virtual void open(char* filename){
         file = std::make_unique<std::fstream>(

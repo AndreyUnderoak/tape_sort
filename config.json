@@ -1,0 +1,8 @@
+{
+    "memory_int": 100,
+    "delays": {
+        "read_write": 3,
+        "go_to": 2,
+        "go_end": 10
+    }
+}

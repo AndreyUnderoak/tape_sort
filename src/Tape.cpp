@@ -1,21 +1,24 @@
 #include "Tape.hpp"
 
 
-Tape::Tape(char* filename, int delay, int pose): tape_delay(delay), pose(pose){
+Tape::Tape(char* filename, int delay_rw, int delay_goto, int delay_full): 
+           delay_rw(delay_rw), delay_goto(delay_goto), delay_full(delay_full), pose(pose){
     reader.open(filename);
 }
 
 int Tape::read_value(){
+    delay(delay_rw);
     return reader.get_value(pose);
 }
 void Tape::write_value(int val){
+    delay(delay_rw);
     reader.set_value(pose, val);
 }
-void Tape::delay(int scale){
+void Tape::delay(int sec){
 }
 
 void Tape::go_to(int new_pose){
-    delay(abs(pose - new_pose));
+    delay(abs(pose - new_pose)*delay_goto);
     pose = new_pose;
 }
 

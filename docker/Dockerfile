@@ -8,5 +8,3 @@ RUN apt update &&\
     apt install git build-essential cmake -y
 
 ADD . /tape_sort
-
-

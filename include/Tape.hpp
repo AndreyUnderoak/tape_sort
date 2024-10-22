@@ -6,14 +6,14 @@
 class Tape{
 private:
     // current pose and read/write delay
-    int pose, tape_delay;
+    int pose = 0, delay_rw, delay_goto, delay_full;
     // Reader emulator type int
     ReaderEmulator<int> reader;
     /**
     * Delay scale times
-    * @param scale times needed for delay
+    * @param sec seconds to be delayed
     */
-    void delay(int scale);
+    void delay(int sec);
 public:
     /**
     * @param filename name of the file to work with for emulator
@@ -21,7 +21,7 @@ public:
     * @param pos starting position
     * 
     */
-    Tape(char* filename, int delay, int pos);
+    Tape(char* filename, int delay_rw, int delay_goto, int delay_full);
 
     /**
     * Read value from tape by current pose

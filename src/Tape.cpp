@@ -4,6 +4,7 @@
 Tape::Tape(char* filename, int delay_rw, int delay_goto, int delay_full): 
            delay_rw(delay_rw), delay_goto(delay_goto), delay_full(delay_full), pose(pose){
     reader.open(filename);
+    num_of_el = reader.get_num();
 }
 
 int Tape::read_value(){
@@ -15,6 +16,10 @@ void Tape::write_value(int val){
     reader.set_value(pose, val);
 }
 void Tape::delay(int sec){
+}
+
+size_t Tape::get_size(){
+    return num_of_el;
 }
 
 void Tape::go_to(int new_pose){

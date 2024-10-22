@@ -14,7 +14,6 @@ class ReaderEmulator{
 private:
     // file for read and write
     std::unique_ptr<std::fstream> file;
-
 public:
     /**
     * @param filename name of the file to work with
@@ -66,6 +65,13 @@ public:
     void set_value(int pos, T val){
         file->seekp(pos*sizeof(T));
         file->write((char *)&val, sizeof(T));
+    }
+
+    /**
+    *  Get number of elements
+    */
+    size_t get_num(){
+        return file->tellg() / sizeof(T);
     }
 
 

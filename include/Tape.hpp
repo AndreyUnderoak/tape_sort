@@ -7,6 +7,8 @@ class Tape{
 private:
     // current pose and read/write delay
     int pose = 0, delay_rw, delay_goto, delay_full;
+    // number of elements in tape
+    size_t num_of_el;
     // Reader emulator type int
     ReaderEmulator<int> reader;
     /**
@@ -14,6 +16,8 @@ private:
     * @param sec seconds to be delayed
     */
     void delay(int sec);
+
+    bool at_start, at_end;
 public:
     /**
     * @param filename name of the file to work with for emulator
@@ -38,5 +42,7 @@ public:
     * @param new_pose where to go
     */
     void go_to(int new_pose);
+
+    size_t get_size();
 
 };

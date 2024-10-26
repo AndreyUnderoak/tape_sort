@@ -1,8 +1,12 @@
+#ifndef READEREMULATOR_H
+#define READEREMULATOR_H
+
 
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
 #include <memory>
+#include <filesystem>
 
 /**
  * Emulator for physical devices via binary file
@@ -32,12 +36,26 @@ public:
     * TODO: check if file ok?
     */
     virtual void open(char* filename){
+        
+        if (!std::filesystem::exists(filename)) {
+            std::ofstream temp(filename);
+            if (temp.is_open()) {
+                std::cout << "Файл " << filename << " создан.\n";
+            } else {
+                std::cerr << "Не удалось открыть/создать файл.\n";
+            }
+        }
+
         file = std::make_unique<std::fstream>(
                std::fstream(filename, std::ios::in  |
                                       std::ios::out | 
                                       std::ios::ate | 
                                       std::ios::binary)
                );
+
+        if (!file->is_open()) {
+            std::cout << "Файл " << filename << " найден, но не может быть откыт\n";
+        }
     }
 
     virtual ~ReaderEmulator(){
@@ -76,3 +94,6 @@ public:
 
 
 };
+
+
+#endif

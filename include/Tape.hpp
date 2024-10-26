@@ -1,3 +1,6 @@
+#ifndef TAPE_H
+#define TAPE_H
+
 #include "ReaderEmulator.hpp"
 
 /**
@@ -43,6 +46,13 @@ public:
     */
     void go_to(int new_pose);
 
+    void go_front();
+
     size_t get_size();
 
+    void set_size(size_t size);
+
 };
+
+
+#endif

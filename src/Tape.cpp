@@ -22,8 +22,18 @@ size_t Tape::get_size(){
     return num_of_el;
 }
 
+void Tape::set_size(size_t size){
+    num_of_el = size;
+}
+
+
 void Tape::go_to(int new_pose){
     delay(abs(pose - new_pose)*delay_goto);
     pose = new_pose;
+}
+
+void Tape::go_front(){
+    delay(delay_full);
+    pose = 0;
 }
 

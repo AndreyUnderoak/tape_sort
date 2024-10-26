@@ -8,6 +8,8 @@
 #include <memory>
 #include <filesystem>
 
+#include "Colors.hpp"
+
 /**
  * Emulator for physical devices via binary file
  *
@@ -38,11 +40,12 @@ public:
     virtual void open(char* filename){
         
         if (!std::filesystem::exists(filename)) {
+            std::cout << YELLOW_COLOR << "Файл " << filename << " не найден"<< RESET_COLOR << std::endl;
             std::ofstream temp(filename);
             if (temp.is_open()) {
-                std::cout << "Файл " << filename << " создан.\n";
+                std::cout << GREEN_COLOR << "Файл " << filename << " создан" << RESET_COLOR << std::endl;
             } else {
-                std::cerr << "Не удалось открыть/создать файл.\n";
+                std::cerr << YELLOW_COLOR << "Не удалось создать "<< filename <<"файл"<< RESET_COLOR << std::endl;
             }
         }
 
@@ -54,7 +57,7 @@ public:
                );
 
         if (!file->is_open()) {
-            std::cout << "Файл " << filename << " найден, но не может быть откыт\n";
+            std::cout << RED_COLOR << "Файл " << filename << " найден, но не может быть откыт" << RESET_COLOR << std::endl;
         }
     }
 

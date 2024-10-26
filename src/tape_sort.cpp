@@ -2,6 +2,7 @@
 #include <memory>
 #include <cstdio>
 
+#include "Colors.hpp"
 #include "Tape.hpp"
 #include "ConfigParser.hpp"
 #include "TapeSorter.hpp"
@@ -9,12 +10,12 @@
 
 int main(int argc, char *argv[]){
     if (argc!=3) {
-        std::cout << "Недостаточно аргументов. Введите: ./tape_sort <имя_входного_файла> <имя_выходного_файла>\n";
+        std::cout << RED_COLOR << "Недостаточно аргументов. Введите: ./tape_sort <имя_входного_файла> <имя_выходного_файла>\n" << RESET_COLOR << std::endl;
         return 1;
     }
     
     ConfigParser cp("config.json");
-
+    
     Tape t(argv[1], cp.get_delay_rw(), 
                     cp.get_delay_goto(), 
                     cp.get_delay_full());

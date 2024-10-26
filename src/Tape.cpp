@@ -1,10 +1,12 @@
 #include "Tape.hpp"
 
+#include "Colors.hpp"
 
 Tape::Tape(char* filename, int delay_rw, int delay_goto, int delay_full): 
            delay_rw(delay_rw), delay_goto(delay_goto), delay_full(delay_full), pose(pose){
     reader.open(filename);
     num_of_el = reader.get_num();
+    std::cout << GREEN_COLOR << "Лента "<< filename << " создана" << RESET_COLOR << std::endl;
 }
 
 int Tape::read_value(){

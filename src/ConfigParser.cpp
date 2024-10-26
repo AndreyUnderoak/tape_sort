@@ -1,12 +1,14 @@
 #include "ConfigParser.hpp"
 
+#include "Colors.hpp"
+
 ConfigParser::ConfigParser(){};
 ConfigParser::ConfigParser(char* filename){
     parse(filename);
 }
 
 void ConfigParser::parse(char* filename){
-    std::cout << "Parsing " << filename << std::endl;
+    std::cout << YELLOW_COLOR << "Парсинг файла " << filename << std::endl;
     std::ifstream file("config.json", std::ifstream::binary);
     // if (!file.is_open()) {
     //     std::cerr << "Ошибка открытия файла!" << std::endl;
@@ -21,10 +23,12 @@ void ConfigParser::parse(char* filename){
     int delay_go_to = root["delays"]["go_to"].asInt();
     int delay_go_end = root["delays"]["go_end"].asInt();
 
+
+    std::cout << GREEN_COLOR << "Конфигурация загружена:"<< RESET_COLOR << std::endl;
     std::cout << "Memory: " << mem << " (int)" << std::endl;
     std::cout << "Delay rw: " << delay_rw << " (sec)" << std::endl;
     std::cout << "Delay go_to: " << delay_go_to << " (sec)" << std::endl;
-    std::cout << "Delay go_end: " << delay_go_end << " (sec)" << std::endl;
+    std::cout << "Delay go_end: " << delay_go_end << " (sec)" << std::endl << std::endl;
 
 }
 

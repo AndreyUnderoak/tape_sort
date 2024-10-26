@@ -37,10 +37,11 @@ int main(int argc, char *argv[]){
                       cp.get_delay_goto(), 
                       cp.get_delay_full());
     
-
     
+    std::cout << YELLOW_COLOR << "Инициализация сортировщика ..." << RESET_COLOR << std::endl;
     TapeSorter ts(&in, &t_temp, &out, cp.get_mem());
-
+    
+    std::cout << GREEN_COLOR << "Начало сортировки:" << RESET_COLOR << std::endl;
     ts.sort();
     // std::cout<<"--------- 5 ---------"<<std::endl;
     // t.go_to(5);

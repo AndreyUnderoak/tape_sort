@@ -1,3 +1,6 @@
+#ifndef CONFIGPARSER_H
+#define CONFIGPARSER_H
+
 #include <iostream>
 #include <fstream>
 #include <json/json.h>
@@ -27,3 +30,6 @@ public:
     int get_mem();
     // int get_by_key(char* key);
 };
+
+
+#endif

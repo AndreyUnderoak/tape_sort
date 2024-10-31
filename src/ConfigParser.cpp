@@ -18,10 +18,10 @@ void ConfigParser::parse(char* filename){
     Json::Value root;
     file >> root;
 
-    int mem = root["memory_int"].asInt();
-    int delay_rw = root["delays"]["read_write"].asInt();
-    int delay_go_to = root["delays"]["go_to"].asInt();
-    int delay_go_end = root["delays"]["go_end"].asInt();
+    mem = root["memory_int"].asInt();
+    delay_rw = root["delays"]["read_write"].asInt();
+    delay_go_to = root["delays"]["go_to"].asInt();
+    delay_go_end = root["delays"]["go_end"].asInt();
 
 
     std::cout << GREEN_COLOR << "Конфигурация загружена:"<< RESET_COLOR << std::endl;

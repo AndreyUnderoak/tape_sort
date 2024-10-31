@@ -12,16 +12,16 @@ private:
     int pose = 0, delay_rw, delay_goto, delay_full;
     // number of elements in tape
     size_t num_of_el;
-    // Reader emulator type int
-    ReaderEmulator<int> reader;
+    
     /**
     * Delay scale times
     * @param sec seconds to be delayed
     */
     void delay(int sec);
 
-    bool at_start, at_end;
 public:
+    // Reader emulator type int
+    ReaderEmulator<int> reader;
     /**
     * @param filename name of the file to work with for emulator
     * @param delay delay of tape

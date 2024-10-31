@@ -47,6 +47,7 @@ public:
             } else {
                 std::cerr << YELLOW_COLOR << "Не удалось создать "<< filename <<"файл"<< RESET_COLOR << std::endl;
             }
+            temp.close();
         }
 
         file = std::make_unique<std::fstream>(
@@ -71,6 +72,7 @@ public:
     *  TODO: check if file ok?
     */
     T get_value(int pos){
+        file->clear();
         file->seekg(pos*sizeof(T));
         T temp;
         file->read((char *)&temp, sizeof(T));
@@ -84,6 +86,7 @@ public:
     *  TODO: check if file ok?
     */
     void set_value(int pos, T val){
+        file->clear();
         file->seekp(pos*sizeof(T));
         file->write((char *)&val, sizeof(T));
     }

@@ -24,7 +24,7 @@ public:
     /**
     * @param filename name of the file to work with
     */
-    ReaderEmulator(char* filename){
+    ReaderEmulator(const char* filename){
         open(filename);
     }
     /**
@@ -37,7 +37,7 @@ public:
     * @param filename name of the file to work with
     * TODO: check if file ok?
     */
-    virtual void open(char* filename){
+    virtual void open(const char* filename){
         
         if (!std::filesystem::exists(filename)) {
             std::cout << YELLOW_COLOR << "Файл " << filename << " не найден"<< RESET_COLOR << std::endl;

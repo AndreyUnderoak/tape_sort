@@ -11,7 +11,7 @@
 
 int main(int argc, char *argv[]){
 
-    char *in_filename, *out_filename;
+    const char *in_filename, *out_filename;
     if (argc!=3) {
         // std::cout << RED_COLOR << "Недостаточно аргументов. Введите: ./tape_sort <имя_входного_файла> <имя_выходного_файла>\n" << RESET_COLOR << std::endl;
         // return 1;
@@ -22,30 +22,43 @@ int main(int argc, char *argv[]){
         in_filename = argv[1];
         out_filename = argv[2];
     }
-        
-    ConfigParser cp("config.json");
+
+    const char* temp_filename   = "tmp/temp.bin";
+    const char* config_filename = "config.json";
+
+    std::shared_ptr<Tape> tape_in, tape_temp, tape_out;
+    std::unique_ptr<ConfigParser> cp;
     
-    Tape t(in_filename, cp.get_delay_rw(), 
-                    cp.get_delay_goto(), 
-                    cp.get_delay_full());
+    // opening all files to start sort
+    try{
+        cp = std::make_unique<ConfigParser>(config_filename);
 
+        tape_in = std::make_shared<Tape>(in_filename, 
+                                         cp->get_delay_rw(), 
+                                         cp->get_delay_goto(), 
+                                         cp->get_delay_full()
+                                         );
 
-    Tape in(in_filename, cp.get_delay_rw(), 
-                     cp.get_delay_goto(), 
-                     cp.get_delay_full());
+        tape_temp = std::make_shared<Tape>(temp_filename, 
+                                         cp->get_delay_rw(), 
+                                         cp->get_delay_goto(), 
+                                         cp->get_delay_full()
+                                         );
 
-    char* temp_file = "tmp/temp.bin";
-
-    Tape t_temp(temp_file, cp.get_delay_rw(), 
-                           cp.get_delay_goto(), 
-                           cp.get_delay_full());
-
-    Tape out(out_filename, cp.get_delay_rw(), 
-                      cp.get_delay_goto(), 
-                      cp.get_delay_full());
+        tape_out = std::make_shared<Tape>(out_filename, 
+                                         cp->get_delay_rw(), 
+                                         cp->get_delay_goto(), 
+                                         cp->get_delay_full()
+                                         );
+    } 
+    catch (const std::runtime_error& e) {
+        std::cerr << e.what() << std::endl;
+        return 1; 
+    }
     
-    std::cout << YELLOW_COLOR << "Инициализация сортировщика ..." << cp.get_mem() <<RESET_COLOR << std::endl;
-    TapeSorter ts(&in, &t_temp, &out, cp.get_mem());
+    
+    std::cout << YELLOW_COLOR << "Инициализация сортировщика ..." <<RESET_COLOR << std::endl;
+    TapeSorter ts(tape_in, tape_temp, tape_out, cp->get_mem());
     
     std::cout << GREEN_COLOR << "Начало сортировки:" << RESET_COLOR << std::endl;
 

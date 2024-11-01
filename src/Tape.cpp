@@ -5,7 +5,9 @@
 #include <thread>
 #include <chrono>
 
-Tape::Tape(char* filename, int delay_rw, int delay_goto, int delay_full): 
+Tape::Tape(){}
+
+Tape::Tape(const char* filename, int delay_rw, int delay_goto, int delay_full): 
            delay_rw(delay_rw), delay_goto(delay_goto), delay_full(delay_full), pose(pose){
     reader.open(filename);
     num_of_el = reader.get_num();

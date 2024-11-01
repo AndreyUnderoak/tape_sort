@@ -3,12 +3,11 @@
 
 #include <iostream>
 #include <fstream>
-#include <json/json.h>
-
 
 class ConfigParser{
 private:
     std::ifstream file;
+    // params
     int mem, delay_rw, delay_go_to, delay_go_end;
 
 public:
@@ -19,11 +18,11 @@ public:
     /**
     * @param filename name of the file to parse
     */
-    ConfigParser(char* filename);
+    ConfigParser(const char* filename);
     /**
     * @param filename name of the file to parse
     */
-    void parse(char* filename);
+    void parse(const char* filename);
     int get_delay_rw();
     int get_delay_goto();
     int get_delay_full();

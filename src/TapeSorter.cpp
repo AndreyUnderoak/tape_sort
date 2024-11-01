@@ -7,7 +7,7 @@
 #include "TapeSorter.hpp"
 #include "Colors.hpp"
 
-TapeSorter::TapeSorter(Tape *in_tape, Tape *temp_tape, Tape *out_tape, int memory_size):in_tape(in_tape), temp_tape(temp_tape), out_tape(out_tape), memory_size(memory_size){
+TapeSorter::TapeSorter(std::shared_ptr<Tape> in_tape, std::shared_ptr<Tape> temp_tape, std::shared_ptr<Tape> out_tape, int memory_size):in_tape(in_tape), temp_tape(temp_tape), out_tape(out_tape), memory_size(memory_size){
     // prepare temp and out tape
     temp_tape->set_size(0);
     out_tape->set_size(0);

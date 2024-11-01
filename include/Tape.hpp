@@ -28,7 +28,12 @@ public:
     * @param pos starting position
     * 
     */
-    Tape(char* filename, int delay_rw, int delay_goto, int delay_full);
+    Tape(const char* filename, int delay_rw, int delay_goto, int delay_full);
+
+    /**
+    * Empty Tape
+    * */
+    Tape();
 
     /**
     * Read value from tape by current pose

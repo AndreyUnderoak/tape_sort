@@ -25,30 +25,39 @@ void TapeSorter::sort(){
     // if buffer cover all array
     if(num_iters == 0) num_iters = 1;
     // start from out tape if iterations mod 2 = 1
-    if(num_iters % 2 == 0) 
+    if(num_iters % 2 != 0) 
         std::swap(out_tape, temp_tape);
 
-    while(out_counter_start < in_tape->get_size()){
-        // LOGS
-            std::cout<<"Позиция чтения ленты: " << out_counter_start <<std::endl;
+    // thread for filling the buffer q
+    std::thread fill_thread;
 
-        bf_filler(buff1, out_counter_start);
+    while(out_counter_start < in_tape->get_size() + buffer_size ){
+        // push fill to thread
+        fill_thread = std::thread(&TapeSorter::bf_filler, this, std::ref(buff1), out_counter_start);
 
-        // LOGS
-            std::cout<<YELLOW_COLOR<<"Загрузка буффера: "<<RESET_COLOR<<std::endl;
-            for(const auto &t : buff1) std::cout<<t<<std::endl;
+        // bf_filler(buff1, out_counter_start);
 
-        bf_tp_sort(buff1, *temp_tape, *out_tape);
+        bf_tp_sort(buff2, *temp_tape, *out_tape);
 
+        // swapping buffers for filling and sorting
         std::swap(out_tape, temp_tape);
-
         out_counter_start += buffer_size;
+
+        // wait for filling buffer, just in case
+        if (fill_thread.joinable()) {
+            fill_thread.join();
+        }
+        // swapping buffers for filling and sorting
+        std::swap(buff1, buff2);
     }
 }
 
 
 // NOTE: start from 0
-void TapeSorter::bf_filler(std::multiset<int> &buffer, int start){
+void TapeSorter::bf_filler(std::multiset<int> &buffer, size_t start){
+    // LOGS
+        std::cout<<"Позиция чтения входной ленты для буффера: " << start <<std::endl;
+
     // clear our buffer
     buffer.clear();
     // filling the buffer 
@@ -58,6 +67,10 @@ void TapeSorter::bf_filler(std::multiset<int> &buffer, int start){
     }
 }
 void TapeSorter::bf_tp_sort(std::multiset<int> &buffer, Tape &temp, Tape &out){
+    // LOGS
+            std::cout<<YELLOW_COLOR<<"Загрузка буффера для сортировки: "<<RESET_COLOR<<std::endl;
+            for(const auto &t : buffer) std::cout<<t<<std::endl;
+
     // counters for out Tape and temp Tape
     size_t out_counter = 0;
     size_t temp_counter = 0;

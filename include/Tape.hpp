@@ -17,7 +17,7 @@ private:
     * Delay scale times
     * @param sec seconds to be delayed
     */
-    void delay(int sec);
+    void delay(int msec);
 
 public:
     // Reader emulator type int

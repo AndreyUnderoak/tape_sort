@@ -2,6 +2,9 @@
 
 #include "Colors.hpp"
 
+#include <thread>
+#include <chrono>
+
 Tape::Tape(char* filename, int delay_rw, int delay_goto, int delay_full): 
            delay_rw(delay_rw), delay_goto(delay_goto), delay_full(delay_full), pose(pose){
     reader.open(filename);
@@ -10,6 +13,7 @@ Tape::Tape(char* filename, int delay_rw, int delay_goto, int delay_full):
 }
 
 int Tape::read_value(){
+    // if(pose > num_of_el) return 0; //RAISE
     delay(delay_rw);
     return reader.get_value(pose);
 }
@@ -17,7 +21,8 @@ void Tape::write_value(int val){
     delay(delay_rw);
     reader.set_value(pose, val);
 }
-void Tape::delay(int sec){
+void Tape::delay(int msec){
+    std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 }
 
 size_t Tape::get_size(){

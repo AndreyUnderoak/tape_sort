@@ -26,9 +26,9 @@ void ConfigParser::parse(char* filename){
 
     std::cout << GREEN_COLOR << "Конфигурация загружена:"<< RESET_COLOR << std::endl;
     std::cout << "Memory: " << mem << " (int)" << std::endl;
-    std::cout << "Delay rw: " << delay_rw << " (sec)" << std::endl;
-    std::cout << "Delay go_to: " << delay_go_to << " (sec)" << std::endl;
-    std::cout << "Delay go_end: " << delay_go_end << " (sec)" << std::endl << std::endl;
+    std::cout << "Задержка на запись/чтение: " << delay_rw << " (milliseconds)" << std::endl;
+    std::cout << "Задержка на сдвиг на 1 позицию: " << delay_go_to << " (milliseconds)" << std::endl;
+    std::cout << "Задержка на перемотку: " << delay_go_end << " (milliseconds)" << std::endl << std::endl;
 
 }
 

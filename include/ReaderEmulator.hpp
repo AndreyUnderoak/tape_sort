@@ -73,6 +73,7 @@ public:
     */
     T get_value(int pos){
         file->clear();
+        // if(pos > file->get_num()) return 0; //RAISE
         file->seekg(pos*sizeof(T));
         T temp;
         file->read((char *)&temp, sizeof(T));

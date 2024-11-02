@@ -7,7 +7,7 @@
 #include "TapeSorter.hpp"
 #include "Colors.hpp"
 
-TapeSorter::TapeSorter(std::shared_ptr<Tape> in_tape, std::shared_ptr<Tape> temp_tape, std::shared_ptr<Tape> out_tape, int memory_size):in_tape(in_tape), temp_tape(temp_tape), out_tape(out_tape), memory_size(memory_size){
+TapeSorter::TapeSorter(std::shared_ptr<Tape> in_tape, std::shared_ptr<Tape> temp_tape, std::shared_ptr<Tape> out_tape, const int memory_size):in_tape(in_tape), temp_tape(temp_tape), out_tape(out_tape), memory_size(memory_size){
     // prepare temp and out tape
     temp_tape->set_size(0);
     out_tape->set_size(0);
@@ -15,6 +15,8 @@ TapeSorter::TapeSorter(std::shared_ptr<Tape> in_tape, std::shared_ptr<Tape> temp
     // get size of our buffer = RAM / 2 
     buffer_size = memory_size / 2;
     std::cout<<"Размер буфера: " << buffer_size <<std::endl;
+
+    if(memory_size < 1) throw std::runtime_error("Размер RAM не может быть 0 или меньше. Нет RAM, нет и сортировки:)");
 }
 
 void TapeSorter::sort(){

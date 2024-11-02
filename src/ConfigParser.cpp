@@ -19,6 +19,9 @@ void ConfigParser::parse(const char* filename){
     Json::Value root;
     file >> root;
 
+    if(file.is_open())
+        file.close();
+
     mem = root["memory_int"].asInt();
     delay_rw = root["delays"]["read_write"].asInt();
     delay_go_to = root["delays"]["go_to"].asInt();

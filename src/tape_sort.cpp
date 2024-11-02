@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
         out_filename = argv[2];
     }
 
-    const char* temp_filename   = "tmp/temp.bin";
+    const char* temp_filename   = "./tmp/temp.bin";
     const char* config_filename = "config.json";
 
     std::shared_ptr<Tape> tape_in, tape_temp, tape_out;
@@ -55,7 +55,6 @@ int main(int argc, char *argv[]){
         std::cerr << e.what() << std::endl;
         return 1; 
     }
-    
     
     std::cout << YELLOW_COLOR << "Инициализация сортировщика ..." <<RESET_COLOR << std::endl;
     TapeSorter ts(tape_in, tape_temp, tape_out, cp->get_mem());

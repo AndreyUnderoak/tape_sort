@@ -15,9 +15,9 @@ private:
     
     /**
     * Delay scale times
-    * @param sec seconds to be delayed
+    * @param msec milliseconds to be delayed
     */
-    void delay(int msec);
+    void delay(const int msec);
 
 public:
     // Reader emulator type int
@@ -28,7 +28,7 @@ public:
     * @param pos starting position
     * 
     */
-    Tape(const char* filename, int delay_rw, int delay_goto, int delay_full);
+    Tape(const char* filename, const int delay_rw, const int delay_goto, const int delay_full);
 
     /**
     * Empty Tape
@@ -44,18 +44,18 @@ public:
     * Write value into current pose tape
     * @param value to write
     */
-    void write_value(int val);
+    void write_value(const int val);
      /**
     * Go to pos
     * @param new_pose where to go
     */
-    void go_to(int new_pose);
+    void go_to(const int new_pose);
 
     void go_front();
 
     size_t get_size();
 
-    void set_size(size_t size);
+    void set_size(const size_t size);
 
 };
 

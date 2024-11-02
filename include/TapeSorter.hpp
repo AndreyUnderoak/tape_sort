@@ -15,7 +15,7 @@ public:
     void bf_filler(std::multiset<int> &buffer, size_t start);
     void bf_tp_sort(std::multiset<int> &buffer, Tape &temp_tape, Tape &out_tape);
 
-    TapeSorter(std::shared_ptr<Tape> in_tape, std::shared_ptr<Tape> temp_tape, std::shared_ptr<Tape> out_tape, int memory_size);
+    TapeSorter(std::shared_ptr<Tape> in_tape, std::shared_ptr<Tape> temp_tape, std::shared_ptr<Tape> out_tape, const int memory_size);
     void sort();
 };
 

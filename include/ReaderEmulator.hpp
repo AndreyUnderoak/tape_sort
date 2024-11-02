@@ -25,7 +25,12 @@ public:
     * @param filename name of the file to work with
     */
     ReaderEmulator(const char* filename){
-        open(filename);
+        try{
+            open(filename);
+        }
+        catch (const std::runtime_error& e) {
+            throw;
+        }
     }
     /**
     *  Empty. Do open(filename) to start working
@@ -38,15 +43,22 @@ public:
     * TODO: check if file ok?
     */
     virtual void open(const char* filename){
-        
+        std::filesystem::path file_path(filename);
+        std::filesystem::path dir_path = file_path.parent_path();
+
+        if (!std::filesystem::exists(dir_path) && dir_path!="") {
+            throw std::runtime_error("Ошибка: директория " + std::string(dir_path)+ " несуществует, или не может быть найден\n");
+        }
+
         if (!std::filesystem::exists(filename)) {
             std::cout << YELLOW_COLOR << "Файл " << filename << " не найден"<< RESET_COLOR << std::endl;
             std::ofstream temp(filename);
-            if (temp.is_open()) {
-                std::cout << GREEN_COLOR << "Файл " << filename << " создан" << RESET_COLOR << std::endl;
+            if (!temp.is_open()) {
+                throw std::runtime_error("Ошибка: не удалось создать "+ std::string(filename) + "файл. \nВозможно у приложения не хватает прав для его создания.\nПриложение не может создать директорию, где находится файл, создайте её заранее");
             } else {
-                std::cerr << YELLOW_COLOR << "Не удалось создать "<< filename <<"файл"<< RESET_COLOR << std::endl;
+                std::cout << GREEN_COLOR << "Файл " << filename << " создан" << RESET_COLOR << std::endl;
             }
+
             temp.close();
         }
 
@@ -58,12 +70,13 @@ public:
                );
 
         if (!file->is_open()) {
-            std::cout << RED_COLOR << "Файл " << filename << " найден, но не может быть откыт" << RESET_COLOR << std::endl;
+            throw std::runtime_error("Ошибка: невозможно открыть файл " + std::string(filename) + ". Запускайте скрипт из директории где в корне находится "+ std::string(filename));
         }
     }
 
     virtual ~ReaderEmulator(){
-        file->close();
+        if(file && file->is_open())
+            file->close();
     }
 
     /**
@@ -71,7 +84,7 @@ public:
     *  @param pos number of position to be readed
     *  TODO: check if file ok?
     */
-    T get_value(int pos){
+    T get_value(const int pos){
         file->clear();
         // if(pos > file->get_num()) return 0; //RAISE
         file->seekg(pos*sizeof(T));
@@ -86,7 +99,7 @@ public:
     *  @param val value to be set
     *  TODO: check if file ok?
     */
-    void set_value(int pos, T val){
+    void set_value(const int pos, const T val){
         file->clear();
         file->seekp(pos*sizeof(T));
         file->write((char *)&val, sizeof(T));

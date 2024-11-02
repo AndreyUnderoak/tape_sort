@@ -32,6 +32,9 @@ void TapeSorter::sort(){
 
     // thread for filling the buffer q
     std::thread fill_thread;
+    if (fill_thread.joinable()) {
+        fill_thread.join();
+    }
 
     while(out_counter_start < in_tape->get_size() + buffer_size ){
         // push fill to thread

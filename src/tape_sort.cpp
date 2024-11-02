@@ -11,21 +11,23 @@
 
 int main(int argc, char *argv[]){
 
+    std::cout<<">>>>>>>>>>>TAPE SORT<<<<<<<<<<<"<<std::endl<<std::endl;
+
+    // filenames
     const char *in_filename, *out_filename;
     if (argc!=3) {
-        // std::cout << RED_COLOR << "Недостаточно аргументов. Введите: ./tape_sort <имя_входного_файла> <имя_выходного_файла>\n" << RESET_COLOR << std::endl;
-        // return 1;
-        in_filename = "files/in.bin";
-        out_filename = "files/out.bin";
+        std::cout << RED_COLOR << "Недостаточно аргументов. Введите: ./tape_sort <имя_входного_файла> <имя_выходного_файла>\n" << RESET_COLOR << std::endl;
+        return 1;
     }
     else{
         in_filename = argv[1];
         out_filename = argv[2];
     }
-
+    // config and temp files
     const char* temp_filename   = "./tmp/temp.bin";
     const char* config_filename = "config.json";
 
+    // pointers for tapes and config
     std::shared_ptr<Tape> tape_in, tape_temp, tape_out;
     std::unique_ptr<ConfigParser> cp;
     
@@ -67,23 +69,6 @@ int main(int argc, char *argv[]){
     std::chrono::duration<double> elapsed_seconds = end - start;
     std::cout << GREEN_COLOR << "Время выполнения сортировки: "<< RESET_COLOR << std::fixed << std::setprecision(2)
               << elapsed_seconds.count() << " (сек)" << std::endl;
-    // std::cout<<"--------- 5 ---------"<<std::endl;
-    // t.go_to(5);
-    // std::cout<<5<<" -> "<<t.read_value()<<std::endl;
-    // std::cout<<"WRITE ON 5"<<std::endl;
-    // t.write_value(100);
-    // std::cout<<"--------- 5 ---------"<<std::endl;
-    // t.go_to(5);
-    // std::cout<<5<<" -> "<<t.read_value()<<std::endl;
-    // std::cout<<"--------- 1 ---------"<<std::endl;
-    // t.go_to(1);
-    // std::cout<<1<<" -> "<<t.read_value()<<std::endl;
-    // std::cout<<"--------- 5 ---------"<<std::endl;
-    // t.go_to(5);
-    // std::cout<<5<<" -> "<<t.read_value()<<std::endl;
-    // std::cout<<"--------- 1 ---------"<<std::endl;
-    // t.go_to(1);
-    // std::cout<<1<<" -> "<<t.read_value()<<std::endl;
 
 
     return 0;

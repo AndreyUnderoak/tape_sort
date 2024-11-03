@@ -6,24 +6,30 @@ stages:
   - build-docker
   - push
 
+variables:
+  BUILD_DIR: build
+
+before_script:
+  - mkdir -p $BUILD_DIR
+  - cd $BUILD_DIR
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
 build:
   stage: build
   script:
-    - chmod +x scripts/build.sh    
-    - chmod +x scripts/echo.sh    
-    - ./scripts/build.sh             
+    - cd build
+    - cmake ..
+    - make -j$(($(nproc)-1))        
 
 test:
   stage: test
   dependencies:
     - build                          
   script:
-    - cd build && ctest       
+    - cd build
+    - ctest --output-on-failure       
   
-
 build-docker:
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   stage: build-docker
   dependencies:
     - build

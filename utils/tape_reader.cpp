@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
         return 1;
     }
     
-    ConfigParser cp("config.json");
+    ConfigParser cp("./configs/config.json");
 
     Tape t(argv[1], cp.get_delay_rw(), 
                     cp.get_delay_goto(), 

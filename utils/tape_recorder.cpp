@@ -10,17 +10,18 @@ int main(int argc, char *argv[]){
         return 1;
     }
     
-    ConfigParser cp("config.json");
+    ConfigParser cp("./configs/config.json");
 
     Tape t(argv[1], cp.get_delay_rw(), 
                     cp.get_delay_goto(), 
                     cp.get_delay_full());
     t.go_to(0);
     int num, i = 0;
-    std::cout<<"Вводите числа поочередно с новой строки для записи в ленту:"<<std::endl;
+    std::cout<<"Вводите числа поочередно с новой строки для записи в ленту: \nЧтобы остановить запись введи любой символ"<<std::endl;
     while (std::cin >> num) {
         t.write_value(num);
         t.go_to(++i);
     }
+    t.clear_after(i);
     return 0;
 }

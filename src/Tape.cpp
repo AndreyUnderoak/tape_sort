@@ -15,7 +15,7 @@ Tape::Tape(const char* filename, int delay_rw, int delay_goto, int delay_full):
     catch (const std::runtime_error& e) {
         throw;
     }
-    
+    pose = 0;
     num_of_el = reader.get_num();
     std::cout << GREEN_COLOR << "Лента "<< filename << " создана" << RESET_COLOR << std::endl << std::endl;
 }
@@ -43,7 +43,10 @@ void Tape::set_size(const size_t size){
 
 
 void Tape::go_to(const int new_pose){
-    std::cout<<"Delay: "<<abs(pose - new_pose)*delay_goto<<std::endl;
+    // std::cout<<"Delay: "<<abs(pose - new_pose)*delay_goto<<std::endl;
+    // std::cout<<"pose: "<<pose<<std::endl;
+    // std::cout<<"new_pose: "<<new_pose<<std::endl;
+    // std::cout<<"delay_goto: "<<delay_goto<<std::endl;
     delay(abs(pose - new_pose)*delay_goto);
     pose = new_pose;
 }

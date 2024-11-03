@@ -51,11 +51,24 @@ public:
     */
     void go_to(const int new_pose);
 
+    /**
+    * Go to 0 pos FASTER
+    */
     void go_front();
 
+    /**
+    * Get Tape size
+    * @return Tape size
+    */
     size_t get_size();
 
+    /**
+    * Set Tape size
+    * @param size new size
+    */
     void set_size(const size_t size);
+
+    void clear_after(const size_t new_end);
 
 };
 

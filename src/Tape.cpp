@@ -43,6 +43,7 @@ void Tape::set_size(const size_t size){
 
 
 void Tape::go_to(const int new_pose){
+    std::cout<<"Delay: "<<abs(pose - new_pose)*delay_goto<<std::endl;
     delay(abs(pose - new_pose)*delay_goto);
     pose = new_pose;
 }
@@ -52,3 +53,6 @@ void Tape::go_front(){
     pose = 0;
 }
 
+void Tape::clear_after(const size_t new_end){
+    reader.set_end(new_end);
+}

@@ -2,7 +2,6 @@ image: registry.gitlab.com/andreyunderoak/tape_sort:latest
 
 stages:
   - test
-  - push   
 
 before_script:
   - chmod +x -R scripts    

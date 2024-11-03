@@ -68,6 +68,7 @@ public:
                                       std::ios::ate | 
                                       std::ios::binary)
                );
+        file->clear();
 
         if (!file->is_open()) {
             throw std::runtime_error("Ошибка: невозможно открыть файл " + std::string(filename) + ". Запускайте скрипт из директории где в корне находится "+ std::string(filename));
@@ -97,7 +98,6 @@ public:
     *  Setting value by position
     *  @param pos number of position to be set
     *  @param val value to be set
-    *  TODO: check if file ok?
     */
     void set_value(const int pos, const T val){
         file->clear();
@@ -109,9 +109,19 @@ public:
     *  Get number of elements
     */
     size_t get_num(){
+        file->clear();
         return file->tellg() / sizeof(T);
     }
 
+    /**
+    *  Setting end of file
+    *  @param new_end new end of file
+    */
+    void set_end(const size_t new_end){
+        file->clear();
+        file->seekp(new_end*sizeof(T), std::ios::beg); // перемещаем указатель на 10 байт от начала
+        file->setstate(std::ios::eofbit); // устанавливаем конец файла
+    }
 
 };
 

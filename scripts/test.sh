@@ -7,8 +7,7 @@ echo "
 "
 
 if [ ! -d "build" ]; then
-    echo "Ранее должен быть запущен ./build.sh"
-    exit 1
+    sh scripts/build.sh
 fi
 
 cd build

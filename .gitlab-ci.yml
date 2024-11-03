@@ -1,0 +1,42 @@
+image: registry/image
+
+stages:
+  - build
+  - test
+  - build-docker
+  - push
+
+build:
+  stage: build
+  script:
+    - chmod +x scripts/build.sh       
+    - ./scripts/build.sh             
+
+test:
+  stage: test
+  dependencies:
+    - build                          
+  script:
+    - chmod +x scripts/test.sh       
+    - ./scripts/test.sh              
+  artifacts:
+    paths:
+      - test-reports/               
+    expire_in: 1 day
+
+build-docker:
+  stage: build-docker
+  dependencies:
+    - build
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:build-temp" -f docker/Dockerfile .
+
+push:
+  stage: push
+  dependencies:
+    - build-docker
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker tag "$CI_REGISTRY_IMAGE:build-temp" "$CI_REGISTRY_IMAGE:latest"  
+    - docker push "$CI_REGISTRY_IMAGE:latest"                                
+    - docker rmi "$CI_REGISTRY_IMAGE:build-temp"                             

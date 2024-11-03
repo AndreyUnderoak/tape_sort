@@ -1,0 +1,19 @@
+version: '3.9'
+name: 'tape_sort'
+        
+services:
+  tape-sort:
+    image: tape_sort
+    container_name: tape_sort
+    privileged: true 
+    command: ["/bin/bash", "-ci", "./build/tape_sort files/in.tape files/out.tape"]
+    ipc: host
+    stdin_open: true
+    tty: true
+    network_mode: "host"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime:ro
+      - /dev:/dev
+      - ../files:/tape_sort/files
+      - ../configs:/tape_sort/configs

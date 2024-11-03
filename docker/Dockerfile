@@ -5,6 +5,10 @@ ENV TZ=Etc/UTC
 SHELL ["/bin/bash", "-ci"]
 
 RUN apt update &&\
-    apt install git build-essential cmake -y
+    apt install git build-essential cmake libjsoncpp-dev -y
 
 ADD . /tape_sort
+
+WORKDIR /tape_sort
+
+RUN ./build.sh

@@ -11,16 +11,4 @@ test:
   stage: test                 
   script:
     - sh scripts/build.sh
-    - sh scripts/test.sh      
-
-push:
-  stage: push
-  dependencies:
-    - test
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-  script:
-    - sh scripts/docker_build.sh
-    - docker push registry.gitlab.com/andreyunderoak/tape_sort                                         
-  rules:
-    - if: $CI_COMMIT_BRANCH == "release"               
+    - sh scripts/test.sh                

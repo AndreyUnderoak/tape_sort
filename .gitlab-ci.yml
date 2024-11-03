@@ -18,9 +18,7 @@ test:
   dependencies:
     - build                          
   script:
-    - chmod +x scripts/test.sh 
-    - chmod +x scripts/echo.sh         
-    - ./scripts/test.sh              
+    - cd build && ctest       
   
 
 build-docker:

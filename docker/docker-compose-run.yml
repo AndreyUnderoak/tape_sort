@@ -3,7 +3,7 @@ name: 'tape_sort'
         
 services:
   tape-sort:
-    image: tape_sort
+    image: registry.gitlab.com/andreyunderoak/tape_sort
     container_name: tape_sort
     privileged: true 
     command: ["/bin/bash", "-ci", "./build/tape_sort files/in.tape files/out.tape"]

@@ -11,4 +11,4 @@ ADD . /tape_sort
 
 WORKDIR /tape_sort
 
-RUN ./build.sh
+RUN ./scripts/build.sh

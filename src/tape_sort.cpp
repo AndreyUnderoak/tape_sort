@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
     }
     // config and temp files
     const char* temp_filename   = "./tmp/temp.bin";
-    const char* config_filename = "configs/config.json";
+    const char* config_filename = "./configs/config.json";
 
     // pointers for tapes and config
     std::shared_ptr<Tape> tape_in, tape_temp, tape_out;
@@ -52,6 +52,8 @@ int main(int argc, char *argv[]){
                                          cp->get_delay_goto(), 
                                          cp->get_delay_full()
                                          );
+
+        tape_out->clear_after(tape_in->get_size());
     } 
     catch (const std::runtime_error& e) {
         std::cerr << e.what() << std::endl;

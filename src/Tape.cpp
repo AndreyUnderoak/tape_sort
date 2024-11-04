@@ -38,12 +38,13 @@ size_t Tape::get_size(){
 }
 
 void Tape::set_size(const size_t size){
+    if(size < 0) throw std::runtime_error("У ленты нет отрицательных позиций ячеек");
     num_of_el = size;
 }
 
 
 void Tape::go_to(const int new_pose){
-    if(new_pose < 0) throw std::runtime_error("У ленты нет отрицательных ячеек");
+    if(new_pose < 0) throw std::runtime_error("У ленты нет отрицательных позиций ячеек");
     delay(abs(pose - new_pose)*delay_goto);
     pose = new_pose;
 }

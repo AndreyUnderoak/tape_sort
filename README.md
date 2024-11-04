@@ -25,7 +25,7 @@
   ```
   git clone https://gitlab.com/AndreyUnderoak/tape_sort
   cd tape_sort
-  chmod +x -R scritps
+  chmod +x -R scripts
   ``` 
   
   ### 1. Докер

@@ -23,7 +23,7 @@ void TapeSorter::sort(){
     size_t out_counter_start = 0;
     std::multiset<int> buff1, buff2; 
     // get number of iterations
-    int num_iters = ceil(in_tape->get_size()/buffer_size);
+    int num_iters = ceil((float)in_tape->get_size()/(float)buffer_size);
     // if buffer cover all array
     if(num_iters == 0) num_iters = 1;
     // start from out tape if iterations mod 2 = 1

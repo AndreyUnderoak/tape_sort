@@ -43,10 +43,7 @@ void Tape::set_size(const size_t size){
 
 
 void Tape::go_to(const int new_pose){
-    // std::cout<<"Delay: "<<abs(pose - new_pose)*delay_goto<<std::endl;
-    // std::cout<<"pose: "<<pose<<std::endl;
-    // std::cout<<"new_pose: "<<new_pose<<std::endl;
-    // std::cout<<"delay_goto: "<<delay_goto<<std::endl;
+    if(new_pose < 0) throw std::runtime_error("У ленты нет отрицательных ячеек");
     delay(abs(pose - new_pose)*delay_goto);
     pose = new_pose;
 }

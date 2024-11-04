@@ -37,7 +37,7 @@ size_t Tape::get_size(){
     return num_of_el;
 }
 
-void Tape::set_size(const size_t size){
+void Tape::set_size(const int size){
     if(size < 0) throw std::runtime_error("У ленты нет отрицательных позиций ячеек");
     num_of_el = size;
 }
@@ -54,6 +54,7 @@ void Tape::go_front(){
     pose = 0;
 }
 
-void Tape::clear_after(const size_t new_end){
+void Tape::clear_after(const int new_end){
+    if(new_end < 0) throw std::runtime_error("У ленты нет отрицательных позиций ячеек");
     reader.set_end(new_end);
 }

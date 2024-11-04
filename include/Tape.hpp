@@ -66,9 +66,9 @@ public:
     * Set Tape size
     * @param size new size
     */
-    void set_size(const size_t size);
+    void set_size(const int size);
 
-    void clear_after(const size_t new_end);
+    void clear_after(const int new_end);
 
 };
 

@@ -24,5 +24,9 @@ enable_testing()
 add_executable(sort_test tests/sort_test.cpp src/Tape.cpp src/TapeSorter.cpp)
 target_link_libraries(sort_test PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 
+add_executable(tape_test tests/tape_test.cpp src/Tape.cpp src/TapeSorter.cpp)
+target_link_libraries(tape_test PRIVATE ${CMAKE_THREAD_LIBS_INIT})
+
 
 add_test(NAME SortTest COMMAND sort_test)
+add_test(NAME TapeTest COMMAND tape_test)
